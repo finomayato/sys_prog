@@ -30,8 +30,8 @@ int main(int argc, char **argv)
   int                   rc=0;
   pthread_mutexattr_t   mta;
   int                   pshared=0;
-  pthread_mutex_t       mut=PTHREAD_MUTEX_INITIALIZER;
-  pthread_mutex_init(&mut, &mta);
+  //pthread_mutex_t       mut=PTHREAD_MUTEX_INITIALIZER;
+  //pthread_mutex_init(&mut, &mta);
 
   printf("Entering testcase\n");
 
@@ -40,21 +40,22 @@ int main(int argc, char **argv)
   rc = pthread_mutexattr_init(&mta);
   //checkResults("pthread_mutexattr_init()\n", rc);
   showPshared(&mta);
-  */
 
   printf("Change pshared attribute\n");
   rc = pthread_mutexattr_setpshared(&mta, PTHREAD_PROCESS_SHARED);
   //checkResults("pthread_mutexattr_setpshared()\n", rc);  
   showPshared(&mta);
-  //pthread_mutex_lock(&mut);
  
-  int a;
-  scanf("%d", &a);
-  //pthread_mutex_unlock(&mut);
   printf("Destroy mutex attribute\n");
   rc = pthread_mutexattr_destroy(&mta);
   //checkResults("pthread_mutexattr_destroy()\n", rc);
- 
+  */
+
+  int a;
+  scanf("%d", &a);
+  //pthread_mutex_lock(&mut);
+  showPshared(&mta);
+  //pthread_mutex_unlock(&mut);
   printf("Main completed\n");
   return 0;
 }
