@@ -1,2 +1,2 @@
 all:
-	gcc main.c -lpthread
+	gcc main.c -lpthread -o lab2

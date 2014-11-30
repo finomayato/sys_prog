@@ -1,2 +1,2 @@
 all:
-	gcc mymutex.c main.c -lpthread
+	gcc mymutex.c main.c -lpthread -o lab1
