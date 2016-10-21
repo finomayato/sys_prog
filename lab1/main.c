@@ -38,6 +38,7 @@ struct MyMutex mutex1;
 
 // Globals! Achtung! Keep your children away!
 int counter = 0;
+// _Atomic int counter = 0; we can use _Atomic type instead of mutexes
 int result = 0;
 const int ITERATIONS_NUMBER = 1E6;
 
