@@ -38,10 +38,11 @@ struct MyMutex mutex1;
 
 // Globals! Achtung! Keep your children away!
 int counter = 0;
+// _Atomic int counter = 0; we can use _Atomic type instead of mutexes
 int result = 0;
 const int ITERATIONS_NUMBER = 1E6;
 
-main()
+int main()
 {
     int rc1, rc2;
     int i;
@@ -83,20 +84,18 @@ main()
 void *functionC()
 {
     /*
-    // Funny Mutex locking
-    while (my_mute == 1);
-    my_mute = 1;
+        Locking thread makes not sense. In this case program behaivoring the same as:
+            for(int i=0; i< threadsNumber; i++) {functionC();}
+        Locking around global variable `counter` more accurate solution.
     */
-    LOCK_MUTEX(&mutex1);
 
     int i = 0;
     while (i < ITERATIONS_NUMBER) {
+        LOCK_MUTEX(&mutex1);
         counter++;
+        UNLOCK_MUTEX(&mutex1);
         i++;
     }
     printf("Counter value: %d\n",counter);
     result += counter;
-    // Funny Mutex unlocking
-    //my_mute = 0;
-    UNLOCK_MUTEX(&mutex1);
 }
